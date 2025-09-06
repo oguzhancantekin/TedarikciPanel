@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Müşteri Paneli";
+    var musteriAdi = TempData["MusteriAdi"] as string;
+}
+
+<h2>Hoş geldiniz @musteriAdi!</h2>
+
+<p>Bu sayfa müşteri panelidir. Sipariş verme, geçmiş siparişleri görme gibi bölümler ileride buraya eklenecek.</p>
+    
+<p>Şu anda sadece giriş yapmış bir müşteri olarak hoş geldiniz mesajı gösteriliyor.</p>

@@ -1,0 +1,50 @@
+﻿@model List<TedarikciPanel.Models.Product>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Ürün Listesi";
+}
+
+<h2>Ürünler</h2>
+
+<a class="btn btn-success mb-3" asp-controller="AdminProduct" asp-action="UrunEkle">+ Ürün Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Açıklama</th>
+            <th>Fiyat</th>
+            <th>Stok</th>
+            <th>Resim</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var urun in Model)
+        {
+            <tr>
+                <td>@urun.Ad</td>
+                <td>@urun.Aciklama</td>
+                <td>@urun.Fiyat</td>
+                <td>@urun.Stok</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(urun.ResimYolu))
+                    {
+                        <img src="@urun.ResimYolu" alt="Resim" width="100" />
+                    }
+                    else
+                    {
+                        <span>Yok</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="AdminProduct" asp-action="Edit" asp-route-id="@urun.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="AdminProduct" asp-action="Sil" asp-route-id="@urun.Id" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

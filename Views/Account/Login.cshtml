@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<h2>Giriş Yap</h2>
+
+<form method="post" asp-action="Login">
+    <div class="form-group">
+        <label>Email</label>
+        <input name="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Şifre</label>
+        <input name="sifre" type="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+
+    @if (ViewBag.Hata != null)
+    {
+        <div class="text-danger mt-2">@ViewBag.Hata</div>
+    }
+</form>

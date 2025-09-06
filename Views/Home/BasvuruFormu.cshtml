@@ -1,0 +1,56 @@
+﻿@model TedarikciPanel.Models.CustomerRequest
+
+@{
+    ViewData["Title"] = "Müşteri Başvuru Formu";
+}
+
+<h2>Müşteri Olun</h2>
+
+@if (ViewBag.Basarili != null && ViewBag.Basarili == true)
+{
+    <div class="alert alert-success">Başvurunuz başarıyla alınmıştır. Onay sonrası giriş yapabilirsiniz.</div>
+}
+
+<form asp-action="BasvuruGonder" method="post">
+    <div>
+        <label>Ad - Soyad</label>
+        <input asp-for="AdSoyad" class="form-control" />
+        <span asp-validation-for="AdSoyad" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Telefon</label>
+        <input asp-for="Telefon" class="form-control" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Şirket Adı</label>
+        <input asp-for="SirketAdi" class="form-control" />
+        <span asp-validation-for="SirketAdi" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Şifre</label>
+        <input asp-for="Sifre" type="password" class="form-control" />
+        <span asp-validation-for="Sifre" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Şifre Tekrar</label>
+        <input asp-for="SifreTekrar" type="password" class="form-control" />
+        <span asp-validation-for="SifreTekrar" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Başvur</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

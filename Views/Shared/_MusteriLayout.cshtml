@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Müşteri Paneli</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Müşteri Paneli</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Musteri" asp-action="Urunler">Ürünler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Sepet" asp-action="Index">Sepetim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Siparis" asp-action="Gecmis">Siparişlerim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Çıkış</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="flex-grow-1 pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container">
+            &copy; 2025 - Müşteri Paneli
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

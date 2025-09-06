@@ -1,0 +1,65 @@
+﻿@model List<TedarikciPanel.Models.Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+}
+@{
+    Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+}
+
+<h2>Ürünler</h2>
+
+<div id="uyari" class="alert alert-success d-none" role="alert">
+    Ürün sepete eklendi!
+</div>
+
+<div class="row">
+    @foreach (var urun in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                @if (!string.IsNullOrEmpty(urun.ResimYolu))
+                {
+                    <img src="@urun.ResimYolu" class="card-img-top" style="height: 200px; object-fit: contain;" alt="Ürün Resmi" />
+                }
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@urun.Ad</h5>
+                    <p class="card-text">@urun.Aciklama</p>
+                    <p class="card-text fw-bold">₺@urun.Fiyat.ToString("N2")</p>
+
+                    <!-- AJAX ile sepete ekle -->
+                    <button class="btn btn-primary mt-auto sepeteEkleBtn" data-urunid="@urun.Id">Sepete Ekle</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".sepeteEkleBtn").click(function (e) {
+                e.preventDefault();
+                var urunId = $(this).data("urunid");
+
+                $.ajax({
+                    url: '/Sepet/AddToCart',
+                    type: 'POST',
+                    data: { urunId: urunId },
+                    success: function (res) {
+                        if (res.success) {
+                            $("#uyari").removeClass("d-none").fadeIn();
+
+                            setTimeout(function () {
+                                $("#uyari").fadeOut();
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

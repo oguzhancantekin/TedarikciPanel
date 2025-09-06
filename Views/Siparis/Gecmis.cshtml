@@ -1,0 +1,47 @@
+﻿@model List<TedarikciPanel.Models.Order>
+@{
+    Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+}
+
+<h2>Siparişlerim</h2>
+<p>Geçmişte verdiğiniz siparişler aşağıda listelenmiştir.</p>
+
+@foreach (var siparis in Model)
+{
+    <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                <strong>@siparis.Tarih.ToString("dd.MM.yyyy")</strong> - @siparis.Durum -
+                Toplam: <strong>@siparis.ToplamTutar.ToString("N2") ₺</strong>
+            </div>
+            <div>
+                @* <a asp-controller="Siparis" asp-action="PdfIndir" asp-route-id="@siparis.Id" class="btn btn-sm btn-outline-primary">
+                    PDF İndir
+                </a> *@
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Ürün</th>
+                        <th>Adet</th>
+                        <th>Birim Fiyat</th>
+                        <th>Ara Toplam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var detay in siparis.Detaylar)
+                    {
+                        <tr>
+                            <td>@detay.UrunAd</td>
+                            <td>@detay.Adet</td>
+                            <td>@detay.Fiyat.ToString("N2") ₺</td>
+                            <td>@((detay.Fiyat * detay.Adet).ToString("N2")) ₺</td>  @* <-- DÜZELTİLEN KISIM *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

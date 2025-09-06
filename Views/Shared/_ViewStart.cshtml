@@ -1,0 +1,16 @@
+﻿@{
+    var rol = Context.Session.GetString("Rol");
+
+    if (rol == "Admin")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else if (rol == "Musteri")
+    {
+        Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml"; // Ortak layout, giriş yapılmamış kullanıcılar
+    }
+}

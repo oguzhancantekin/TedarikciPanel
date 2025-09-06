@@ -1,0 +1,42 @@
+﻿@model List<TedarikciPanel.Models.CustomerRequest>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Bekleyen Başvurular</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Şirket Adı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AdSoyad</td>
+                <td>@item.Email</td>
+                <td>@item.Telefon</td>
+                <td>@item.SirketAdi</td>
+                <td>
+                    <form asp-action="Onayla" asp-controller="CustomerRequests" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                    </form>
+
+                    <form asp-action="Sil" asp-controller="CustomerRequests" method="post" style="display:inline" onsubmit="return confirm('Silmek istediğine emin misin?')">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
